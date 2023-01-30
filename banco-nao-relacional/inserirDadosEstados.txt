@@ -1,0 +1,30 @@
+// cria um novo registro
+db.estados.insert({nome: "Acre", sigla: "AC", regiao: "Norte"})
+db.estados.save({nome: "Alagoas", sigla: "AL", regiao: "Nordeste", populacao: 3322000})
+
+// listar dados de uma tabela
+db.estados.find()
+db.estados.find().pretty()
+
+// inserção com um atributo sendo uma lista
+db.estados.insert({
+    nome: "Rio de Janeiro",
+    sigla: "RJ",
+    regiao: "Sudeste",
+    cidades: [{
+        _id: ObjectId(),
+        nome: "Niterói", 
+        area:133.9, 
+        populacao: 487562}]
+    })
+
+// Desafio estado SP
+db.estados.insert({nome: "São Paulo", sigla: "SP", regiao: "Sudeste", cidades: [
+    {_id: ObjectId(), nome: "Campinas", area: 795.7, prefeito: "Jonas Donizette", populacao: 1081000},
+    {_id: ObjectId(), nome: "Guarulhos", populacao: 1325000},
+    {_id: ObjectId(), nome: "Sorocaba", distanciaCapital: 87, populacao: 644919}
+    ]
+    })
+
+// Remover determinado registro pelo ID
+db.estados.remove({"_id": ObjectId("DIGITAR ID")});

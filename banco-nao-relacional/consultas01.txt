@@ -1,0 +1,39 @@
+// Encontra todos os documentos
+db.estados.find()
+
+// Encontra o primeiro documento
+db.estados.findOne()
+
+// Pesquisar por Sigla
+db.estados.findOne({sigla: "RJ"})
+
+// Usando OR
+db.estados.find({$or: [{sigla: "RJ"}, {sigla: "AC"}]})
+
+// Usando AND
+db.estados.find({$and: [{sigla: "RJ"}, {sigla: "AC"}]})
+
+// Pesquisa a coleção que possui o atributo Populacao
+db.estados.find({populacao: {$exists: true}})
+
+// Pular um documento
+db.estados.find().skip(1)
+
+// Pular um documento e limita-lo para 2
+db.estados.find().skip(1).limit(2)
+
+// Contar a quantidade total de documentos
+db.estados.count() --> depreciado
+db.estados.countDocuments()
+
+// Dentro do documento de sigla SP, mostrar nome, sigla e _id: (vem como padrão)
+db.estados.find({sigla: "SP"}, {nome: 1, sigla: 1})
+
+// Dentro do documento de sigla SP, mostrar nome e sigla
+db.estados.find({sigla: "SP"}, {nome: 1, sigla: 1, _id: 0})
+
+// Dentro do documento de sigla SP, mostrar apenas as cidades
+db.estados.find({sigla: "SP"}, {cidades: 1, _id: 0})
+
+// Dentro do documento de sigla SP, mostrar apenas os nomes das cidades
+db.estados.find({sigla: "SP"}, {"cidades.nome": 1, _id: 0})

@@ -1,0 +1,9 @@
+// Remove estados com a sigla "AC"
+db.estados.remove({sigla: "AC"}) --> remove está depreciado
+--> Use deleteOne, deleteMany, findOneAndDelete, or bulkWrite
+
+// Remove apenas um estados que não possua o atributo população
+db.estados.deleteOne({populacao: {$exists: false}})
+
+// Remove estados que possuem populacao menor do que 20.000.000 no atributo "populacao"
+db.estados.deleteOne({populacao: {$lt: 20000000}})

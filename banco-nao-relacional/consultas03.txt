@@ -1,0 +1,31 @@
+// Filtra os estados que são da região Sudeste
+db.estados.aggregate({$match: {regiao: "Sudeste"}}) 
+
+// Filtra os estados que possuem a cidade de Sorocaba
+db.estados.aggregate([
+    {$match: {"cidades.nome": "Sorocaba"}},
+])
+
+// A partir do código anterior, cada estado que passou pelo $match, tem seu atributo "cidades" como
+// uma lista de arrays. O unwind serve para relacionar cada estado a cidade sem uma lista de arrays no
+// atributo "cidades"
+db.estados.aggregate([
+    {$match: {"cidades.nome": "Sorocaba"}},
+    {$unwind: "$cidades"}
+])
+
+// Filtra dentro lista criada anteriormente, apenas aqueles que possuem a cidade de Sorocaba, sem trazer
+// outras cidades junto
+db.estados.aggregate([
+    {$match: {"cidades.nome": "Sorocaba"}},
+    {$unwind: "$cidades"},
+    {$match: {"cidades.nome": "Sorocaba"}}
+])
+
+// Mostra apenas um atributo da cidade
+db.estados.aggregate([
+    {$match: {"cidades.nome": "Sorocaba"}},
+    {$unwind: "$cidades"},
+    {$match: {"cidades.nome": "Sorocaba"}},
+    {$project: {_id: "$cidades._id"}}
+])

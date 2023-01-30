@@ -1,0 +1,14 @@
+// Mostra os banco de dados existentes
+show dbs
+
+// Usa determinado banco de dados, se ele não existir, é criado automaticamente
+use wm
+
+// cria a tabela
+db.createCollection('estados')
+
+// lista tabelas
+show collections
+
+// exclui uma tabela
+db.estados.drop()

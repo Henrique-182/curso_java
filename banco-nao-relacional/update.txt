@@ -1,0 +1,18 @@
+// Adiciona no documento São Paulo, o atributo população
+db.estados.update({sigla: "SP"}, {$set: {populacao: 45340000}}) --> Update está depreciado
+
+// Adiciona um novo registro, se encontrar algum, altera
+db.estados.updateOne({sigla: "AL"}, 
+    {$set: {cidades: [
+        {nome: "Serjipe"}
+        ]
+    }
+})
+
+// Atualiza a populaçãode Santos
+db.estados.updateOne({sigla: "SP"}, 
+    {$push: {cidades: {nome: "Santos", populacao: 433966}}}
+)
+
+// Mostra todos os estados que possuem o atributo "população"
+db.estados.find({populacao: {$exists: true}}, {_id: 0, nome: 1})

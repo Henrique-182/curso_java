@@ -1,0 +1,28 @@
+// Mostrar apenas a empresa que possui o nome Bradesco
+db.empresas.aggregate([
+    {$match: {nome: "Bradesco"}},
+])
+
+// Dentro dessa empresa encontrada, faça uma comparação entre o atributo da empresa "EstadoId", com o 
+// atributo do estado "_id". Nesse lookup, o resultado vai estar armazenado como um atributo "estado"
+db.empresas.aggregate([
+    {$match: {nome: "Bradesco"}},
+    {$lookup: {
+        from: "estados",
+        localField: "estadoId",
+        foreignField: "_id",
+        as: "estado"
+    }}
+])
+
+//
+db.empresas.aggregate([
+    {$match: {nome: "Bradesco"}},
+    {$lookup: {
+        from: "estados",
+        localField: "estadoId",
+        foreignField: "_id",
+        as: "estado"
+    }},
+    {$unwind: "$estado"}
+])

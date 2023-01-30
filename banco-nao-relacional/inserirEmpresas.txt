@@ -1,0 +1,9 @@
+// Insere a empresa Bradesco, referenciando o estado
+db.empresas.insert({nome: "Bradesco", estadoId: ObjectId("63d30c612a6b9a6e311fb60c")}) --> insert está depreciado
+db.empresas.insertOne({nome: "Bradesco", estadoId: ObjectId("63d30c612a6b9a6e311fb60c")})
+
+// Insere a empresa Vale, referenciando a cidade
+db.empresas.insertOne({
+    nome: "Vale", 
+    cidadeId: ObjectId("63d30c612a6b9a6e311fb60b")
+})
